@@ -1,4 +1,3 @@
-#!/usr/sbin/python
 
 import sys
 import os.path

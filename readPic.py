@@ -6,7 +6,7 @@ import struct
 
 def MakePixelArray(inputData, startPos, width, height):
     #Init tmp array
-    tmpArray = []
+    tmpArray = [width * height]
 
     for y in range(height):
         for x in range(width):
@@ -19,13 +19,16 @@ def MakePixelArray(inputData, startPos, width, height):
             pixel['b'] = struct.unpack_from('<B', inputData, (startPos + ((y * width) + x) * 3) + 0)[0]
 
             #Add this dictionnary into array
-            tmpArray.append(pixel)
+            #tmpArray.append(pixel)
+            tmpArray[y * width + x] = pixel
 
     return tmpArray
 
 #User can input the path
-filePath = input('Get me the path of picture you want to blur: ')
-print('Your input is:', filePath)
+#filePath = input('Get me the path of picture you want to blur: ')
+#print('Your input is:', filePath)
+
+filePath = './cat.bmp'
 
 #Check if file exist
 if os.path.isfile(filePath):
@@ -61,5 +64,5 @@ print('g= ', picArray[2816]['g'])
 print('b= ', picArray[2816]['b'])
 
 if picDepth != 24:
-    print('Sorry, we only handle 32bits picture, bye')
+    print('Sorry, we only handle 24bits picture, bye')
     sys.exit(1)
